@@ -1,32 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
-body {
-  margin: 0;
-  margin: 0;
-  box-sizing: inherit;
+body{
+    background-color: #24252D;
+    display: block;
 }
 
 .calculator {
-  padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px;
+    width: 250px;
+    height: 410px;
+    padding: 10px;
+    padding-bottom: 0;
+    background-color: #363844;
+    border-radius: 10px;
+
 }
 
 .input {
-  width: 24rem;
-  height: 1.5rem;
-  border: none;
-  background-color: #252525;
-  color: #fff;
-  text-align: right;
+    width: 100%;
+    height: 100px;
+    background-color: #24252D;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.5) inset;
+    border-radius: 10px;
+    color: #fff;
+    text-align: right;
+    padding: 10px;
+    font-size: 20px;
+}
+  
+.buttons {
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    display: grid;
+    grid-template-rows: 50px 50px 50px 50px 50px;
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-areas:    "ac mc ms div"
+                            "n7 n8 n9 mul"
+                            "n4 n5 n6 minus"
+                            "n1 n2 n3 plus"
+                            "n0 dot equal equal";
+    gap: 10px;
 }
 
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 6rem);
-  /* grid-gap: 1rem; */
+button {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    border-radius: 50px;
+    background-color: #535365;
+    color: #000000;
+    font-family: 'Inconsolata', monospace;
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: #49495A;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5) inset;
+}
+
+.operation {
+    color: #24252D;
+    background-color: #89CE94;
+}
+
+.operation:hover{
+    background-color: #6FC37D;
+}
+
+.ac {
+    grid-area: ac;
+}
+
+.mc {
+    grid-area: mc;
+}
+
+.ms {
+    grid-area: ms;
+}
+
+.div {
+    grid-area: div;
+}
+
+.n7 {
+    grid-area: n7;
+}
+
+.n8 {
+    grid-area: n8;
+}
+
+.n9 {
+    grid-area: n9;
+}
+
+.mul {
+    grid-area: mul;
+}
+
+.n4 {
+    grid-area: n4;
+}   
+
+.n5 {
+    grid-area: n5;
+}
+
+.n6 {
+    grid-area: n6;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.n1 {
+    grid-area: n1;
+}
+
+.n2 {
+    grid-area: n2;
+}
+
+.n3 {
+    grid-area: n3;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.n0 {
+    grid-area: n0;
+}
+
+.dot {
+    grid-area: dot;
 }
 
 .equal {
-  grid-area: 2 / 4 / 6 / 5;
+    grid-area: equal;
+    background-color: #48AD59;
+}
+
+.equal:hover {
+    background-color: #429E52;
 }
