@@ -8,6 +8,15 @@ url = require('url');
 
 app.use(express.json())
 
+app.get('/load', (req, res) => {
+  try {
+    const data = fs.readFileSync('data/data.txt', 'utf8').split(/\n/);
+    res.json(data);
+  } catch(err) {
+    res.status(500).send('Could not load data!');
+  }
+});
+
 app.post('/save', (req, res) => {
   const data = req.body.value;
   const filePath = path.join(__dirname, 'data', 'data.txt');
@@ -24,13 +33,8 @@ app.post('/save', (req, res) => {
   } else {
     res.status(500).send('Only numbers can be saved!');
   }
-
+})
   
-})
-
-app.get('/load', (req, res) => {
-  res.send('load')
-})
 
 
 app.listen(port, () => {
