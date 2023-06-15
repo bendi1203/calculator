@@ -45,7 +45,7 @@ body{
     display: grid;
     grid-template-rows: 50px 50px 50px 50px 50px;
     grid-template-columns: 50px 50px 50px 50px;
-    grid-template-areas:    "ac mc ms div"
+    grid-template-areas:    "ac save load div"
                             "n7 n8 n9 mul"
                             "n4 n5 n6 minus"
                             "n1 n2 n3 plus"
@@ -82,12 +82,12 @@ button:hover {
     grid-area: ac;
 }
 
-.mc {
-    grid-area: mc;
+.save {
+    grid-area: save;
 }
 
-.ms {
-    grid-area: ms;
+.load {
+    grid-area: load;
 }
 
 .div {
