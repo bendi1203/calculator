@@ -20,20 +20,20 @@ app.get('/load', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
-  const data = req.body.value;
+  const data = req.body.value; 
   const filePath = path.join(__dirname, 'data', 'data.txt');
 
   if(typeof data === 'number') {
-    fs.appendFile(filePath, JSON.stringify(data) + '\n', (err) => {
+    fs.writeFile(filePath, JSON.stringify(data), { flag: 'w' }, (err) => {
       if(err) {
         console.log(err);
-        res.status(500).send('Cannot save the data!');
+        res.status(500).json('Cannot save the data!');
       } else {
-        res.status(200).send('Data saved successfully!');
+        res.status(200).json('Data saved successfully!');
       }
     })
   } else {
-    res.status(500).send('Only numbers can be saved!');
+    res.status(500).json('Only numbers can be saved!');
   }
 })
   
