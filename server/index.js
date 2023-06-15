@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const port = 5000
+const cors = require('cors');
 
 path = require('path')
 fs = require('fs');
 url = require('url');
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/load', (req, res) => {
   try {
