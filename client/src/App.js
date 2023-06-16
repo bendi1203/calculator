@@ -5,6 +5,7 @@ function App() {
   const [input, setInput] = useState("");
   const [displayedInput, setDisplayedInput] = useState(input);
   const [numbers, setNumbers] = useState([]);
+  const [operator, setOperator] = useState(null);
 
   // const handleButtonClick = (value) => {
   //     setInput((prevInput) => prevInput + value);
@@ -43,39 +44,86 @@ function App() {
   };
 
   const display = (e) => {
-    setInput((prevInput) => prevInput + e.target.value);
-    setDisplayedInput(
-      (prevDisplayedInput) => prevDisplayedInput + e.target.value
-    );
+    const value = e.target.value;
+    if (value === "-" && !displayedInput) {
+      setDisplayedInput("-");
+    } else if (value !== "-") {
+      setInput((prevInput) => prevInput + value);
+      setDisplayedInput((prevDisplayedInput) => prevDisplayedInput + value);
+    }
   };
 
   const division = () => {
-    console.log("division");
+    setOperator("/");
+    setNumbers([...numbers, parseFloat(displayedInput)]);
+    setDisplayedInput("");
   };
 
   const multiplication = (e) => {
+    setOperator("*");
     setNumbers([...numbers, parseFloat(displayedInput)]);
     setDisplayedInput("");
   };
 
   const addition = () => {
-    console.log("addition");
+    setOperator("+");
+    setNumbers([...numbers, parseFloat(displayedInput)]);
+    setDisplayedInput("");
   };
 
   const substraction = () => {
-    console.log("substraction");
+    if (!displayedInput) {
+      setDisplayedInput("-");
+    } else {
+      setOperator("-");
+      setNumbers([...numbers, parseFloat(displayedInput)]);
+      setDisplayedInput("");
+    }
   };
 
   const calculate = () => {
-    const operand1 = numbers[0];
-    const operand2 = parseFloat(displayedInput);
-  
-    if (!isNaN(operand1) && !isNaN(operand2)) {
-      const result = operand1 * operand2;
-      setDisplayedInput(result.toString());
-      setNumbers([]);
+    const operands = [...numbers, parseFloat(displayedInput)];
+    let result = 0; 
+
+    if (operator === "*") {
+      result = 1;
+      operands.forEach((operand) => {
+        if (!isNaN(operand)) {
+          result *= operand;
+        }
+      });
+    } else if (operator === "/") {
+      result = operands[0];
+      for (let i = 1; i < operands.length; i++) {
+        const operand = operands[i];
+        if (!isNaN(operand) && operand !== 0) {
+          result /= operand;
+        } else {
+          console.log('Divisor is 0 or not a number!')
+          return;
+        }
+      };
+    } else if (operator === "+") {
+      result = 0;
+      operands.forEach((operand) => {
+        if (!isNaN(operand)) {
+          result += operand;
+        }
+      });
+    } else if (operator === "-") {
+      result = operands[0];
+      for (let i = 1; i < operands.length; i++) {
+        const operand = operands[i];
+        if (!isNaN(operand) && operand !== 0) {
+          result -= operand;
+        }
+      };
     }
-  }
+
+    setDisplayedInput(result.toString());
+    setNumbers([]);
+    setOperator(null);
+  };
 
   return (
     <div className="calculator">
@@ -185,12 +233,7 @@ function App() {
         >
           .
         </button>
-        <button
-          type="button"
-          value="="
-          className="equal"
-          onClick={calculate}
-        >
+        <button type="button" value="=" className="equal" onClick={calculate}>
           =
         </button>
       </div>
