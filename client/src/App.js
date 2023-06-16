@@ -7,12 +7,14 @@ function App() {
   const [numbers, setNumbers] = useState([]);
   const [operator, setOperator] = useState(null);
 
-  // const handleButtonClick = (value) => {
-  //     setInput((prevInput) => prevInput + value);
-  // ;}
-
   const handleInputChange = (event) => {
     setInput(event.target.value);
+  };
+
+  const handleOperation = (operation) => {
+    setOperator(operation);
+    setNumbers([...numbers, parseFloat(displayedInput)]);
+    setDisplayedInput("");
   };
 
   const save = async () => {
@@ -54,36 +56,28 @@ function App() {
   };
 
   const division = () => {
-    setOperator("/");
-    setNumbers([...numbers, parseFloat(displayedInput)]);
-    setDisplayedInput("");
+    handleOperation("/");
   };
 
   const multiplication = (e) => {
-    setOperator("*");
-    setNumbers([...numbers, parseFloat(displayedInput)]);
-    setDisplayedInput("");
+    handleOperation("*");
   };
 
   const addition = () => {
-    setOperator("+");
-    setNumbers([...numbers, parseFloat(displayedInput)]);
-    setDisplayedInput("");
+    handleOperation("+");
   };
 
-  const substraction = () => {
+  const subtraction = () => {
     if (!displayedInput) {
       setDisplayedInput("-");
     } else {
-      setOperator("-");
-      setNumbers([...numbers, parseFloat(displayedInput)]);
-      setDisplayedInput("");
+      handleOperation("-");
     }
   };
 
   const calculate = () => {
     const operands = [...numbers, parseFloat(displayedInput)];
-    let result = 0; 
+    let result = 0;
 
     if (operator === "*") {
       result = 1;
@@ -99,10 +93,10 @@ function App() {
         if (!isNaN(operand) && operand !== 0) {
           result /= operand;
         } else {
-          console.log('Divisor is 0 or not a number!')
+          console.log("Divisor is 0 or not a number!");
           return;
         }
-      };
+      }
     } else if (operator === "+") {
       result = 0;
       operands.forEach((operand) => {
@@ -117,7 +111,7 @@ function App() {
         if (!isNaN(operand) && operand !== 0) {
           result -= operand;
         }
-      };
+      }
     }
 
     setDisplayedInput(result.toString());
@@ -199,7 +193,7 @@ function App() {
           type="button"
           value="-"
           className="operation minus"
-          onClick={substraction}
+          onClick={subtraction}
         >
           -
         </button>
