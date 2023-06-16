@@ -14,7 +14,6 @@ function App() {
   };
 
   const save = async () => {
-    console.log({displayedInput, type: typeof displayedInput})
     await fetch("http://localhost:5000/save", {
       method: "POST",
       body: JSON.stringify({
@@ -35,7 +34,7 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setInput(data.value);
+        setDisplayedInput(data ? data : '');
       })
       .catch((err) => {
         console.log("error:", err.message);
