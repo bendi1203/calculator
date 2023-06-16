@@ -6,6 +6,7 @@ function App() {
   const [displayedInput, setDisplayedInput] = useState(input);
   const [numbers, setNumbers] = useState([]);
   const [operator, setOperator] = useState(null);
+  const [finish, setFinish] = useState(false);
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -46,6 +47,11 @@ function App() {
   };
 
   const display = (e) => {
+    if(finish) {
+      setDisplayedInput('');
+      setFinish(false);
+    }
+
     const value = e.target.value;
     if (value === "-" && !displayedInput) {
       setDisplayedInput("-");
@@ -76,8 +82,9 @@ function App() {
   };
 
   const calculate = () => {
+    setFinish(true);
     const operands = [...numbers, parseFloat(displayedInput)];
-    let result = 0;
+    let result = '';
 
     if (operator === "*") {
       result = 1;
